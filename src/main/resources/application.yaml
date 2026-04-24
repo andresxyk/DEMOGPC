@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: demogpc
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000/auth
+          jwk-set-uri: http://localhost:9000/auth/oauth2/jwks
+server:
+  port: ${PORT:8000}
+  servlet:
+    context-path: /exam
+logging:
+  level:
+    root: INFO
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
+    org.springframework.web: DEBUG
