@@ -13,20 +13,17 @@ public class FirestoreConfig {
 
     @Bean
     public Firestore firestore() throws Exception {
+
         InputStream serviceAccount = getClass()
                 .getClassLoader()
                 .getResourceAsStream("service-account.json");
 
-        if (serviceAccount == null) {
-            throw new IllegalStateException("No se encontró service-account.json en resources");
+        FirestoreOptions.Builder builder = FirestoreOptions.newBuilder();
+
+        if (serviceAccount != null) {
+            builder.setCredentials(GoogleCredentials.fromStream(serviceAccount));
         }
 
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-
-        FirestoreOptions options = FirestoreOptions.newBuilder()
-                .setCredentials(credentials)
-                .build();
-
-        return options.getService();
+        return builder.build().getService();
     }
 }
