@@ -1,6 +1,6 @@
 runtime: java17
 
-service: auth-server
+service: api
 
 entrypoint: java -jar target/demogpc-0.0.1-SNAPSHOT.jar
 
